@@ -61,10 +61,10 @@ def connect_to_device(ip, port, network_type, device_type, device_id):
 
 def main():
     print ("starting...")
+    device = connect_to_device(sdm_ip, sdm_port, sdm_network_type.lower(), sdm_type, sdm_id)
+    print ("connected to device")        
     while True:
         try:
-            device = connect_to_device(sdm_ip, sdm_port, sdm_network_type.lower(), sdm_type, sdm_id)
-            print ("connected to device")
             if device.connected():
                 data = read_data(device)
             else:
