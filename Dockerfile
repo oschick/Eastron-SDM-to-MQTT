@@ -12,10 +12,10 @@ FROM python:3.10-slim-bullseye
 
 RUN addgroup --gid 1337 app && adduser --uid 1337 --gid 1337 --disabled-password --gecos "App User" app
 
-RUN chown app:app /app
-
 COPY --from=build /venv /venv
 COPY ./src /app
+
+RUN chown app:app /app
 
 USER 1337:1337
 
