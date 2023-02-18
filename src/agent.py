@@ -85,7 +85,7 @@ def main():
             devices.append(connect_to_parent(parent = devices[0], device_id=sdm_ids[i], device_type=sdm_types[i]))
             print ("Connected to device: " + sdm_types[i] + " with Modbus ID: " + str(sdm_ids[i]))
             print(devices[i])
-        print(len(devices)+ "Devices found.")
+        print(str(len(devices))+ "Devices found.")
     print ("connected to devices")
     while True:
         try:
