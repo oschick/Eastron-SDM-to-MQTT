@@ -71,7 +71,7 @@ def connect_to_device(ip, port, network_type, device_type, device_id):
 
 def connect_to_parent(parent, device_id, device_type):
     dev = getattr(sdm_modbus, device_type)
-    return dev(parent=parent, device_id=device_id)
+    return dev(parent=parent, unit=device_id)
 
 def main():
     print ("starting...")
