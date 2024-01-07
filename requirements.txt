@@ -1,3 +1,4 @@
 paho-mqtt>=1.6.1
 pyserial>=3.5
-git+https://github.com/oschick/sdm_modbus_udp.git
+sdm_modbus>=0.7.0
+
