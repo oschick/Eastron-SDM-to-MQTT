@@ -1,4 +1,4 @@
-FROM python:3.10-bullseye AS build
+FROM python:3.11-bullseye AS build
 RUN python -m venv /venv
 
 RUN apt-get -qy update && apt-get -qy install git && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
@@ -8,7 +8,7 @@ RUN /venv/bin/pip install -r /requirements.txt
 
 
 
-FROM python:3.10-slim-bullseye
+FROM python:3.11-slim-bullseye
 
 RUN addgroup --gid 1337 app && adduser --uid 1337 --gid 1337 --disabled-password --gecos "App User" app
 
