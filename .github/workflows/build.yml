@@ -40,3 +40,34 @@ jobs:
         tags: |
           ${{ env.IMAGE }}:${{ env.GIT_REF }}
           ${{ env.IMAGE }}:${{ env.GIT_SHA }}
+
+  hassio:
+    name: Hassio Addon
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    # Check if branch is multiple else skip
+    if: github.ref == 'refs/heads/multiple'
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+        with:
+          repository: oschick/hassio-addons
+          token: ${{ secrets.GH_TOKEN }}
+          path: ./hassio
+
+      - name: Update version
+      # Replace version in config.json with git sha
+        run: |
+          # Replace version in config.json with git sha
+          sed -i -e s#\"version.*#\"version\":\ \"$(echo ${{ github.sha }} | cut -c1-7)\",# ./hassio/sdm_meter_to_mqtt/config.json
+
+      - name: Push
+        run: |
+          cd ./hassio
+          git add .
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git commit -am "Mirror latest sdm_meter release"
+          git push
